@@ -17,17 +17,28 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LearnHttpClient {
 
     public static void main(String[] args) {
         try {
 //            testHttpClientGet();
-            testHttpClientPost();
+//            testHttpClientPost();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        String str = "programming";
+        String str2 = new String("programming");
+        String str3 = "program"+"ing";
+
+        System.out.println("str == str2 : "+(str == str2));
+        System.out.println("str.equals(str2) : "+str.equals(str3));
+        System.out.println("str == str3 : "+(str == str3));
+        System.out.println("str3 == str2.intern() : "+ (str3 == str2.intern()));
     }
 
     private static void testHttpClientGet() throws Exception {
@@ -68,6 +79,7 @@ public class LearnHttpClient {
             String s = EntityUtils.toString(closeableHttpResponse.getEntity(), "utf-8");
             System.out.println(s);
 
+        Map map = new HashMap();
 
     }
 
