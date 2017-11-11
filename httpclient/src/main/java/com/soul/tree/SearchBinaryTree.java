@@ -82,7 +82,6 @@ public class SearchBinaryTree {
             }
             if (p.rightChild != null && p.rightChild.flag == false) {
                 p = p.rightChild;
-                binaryTrees.push(p);
                 continue;
             }
 
@@ -113,7 +112,6 @@ public class SearchBinaryTree {
 
             if (p.rightChild != null && p.rightChild.flag == false) {
                 p = p.rightChild;
-                binaryTrees.push(p);
                 continue;
             }
 
