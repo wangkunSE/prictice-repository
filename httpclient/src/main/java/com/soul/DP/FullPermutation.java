@@ -1,14 +1,12 @@
 package com.soul.DP;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Hashtable;
+import java.nio.ByteBuffer;
+import java.util.*;
 
 public class FullPermutation {
 
     public static void perm(int[] list) {
-        perm(list,0);
+        perm(list, 0);
     }
 
     private static void perm(int[] list, int k) {
@@ -17,7 +15,7 @@ public class FullPermutation {
                 System.out.print(list[i]);
             }
             System.out.println();
-        }else{
+        } else {
             for (int i = k; i < list.length; i++) {
                 swap(list, k, i);
                 perm(list, k + 1);
@@ -32,28 +30,48 @@ public class FullPermutation {
         list[pos2] = temp;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 //        int[] x = {1, 2, 3, 4, 5,6,7,8,9};
 //        long start = System.currentTimeMillis();
 ////        perm(x);
 //        mySlovtion(x);
 //        long end = System.currentTimeMillis();
 //        System.out.println("花费了："+(end-start)+" 时间");
-        System.out.println(a);
+        final FullPermutation fullPermutation = new FullPermutation();
+        for (int i = 0; i < 10; i++) {
+
+            new Thread() {
+                @Override
+                public void run() {
+                    System.out.println("当前线程："+ Thread.currentThread().getName());
+                    for (int j = 0; j < 1000; j++) {
+                        fullPermutation.incr();
+                    };
+                };
+            }.start();
+        }
+
+
+        Thread.sleep(10000);
+        System.out.println(fullPermutation.a);
     }
 
-    private static Integer a ;
+    public void incr() {
+        a++;
+    }
 
-    static Integer getA(){
+    public volatile Integer a = 0;
+
+    static Integer getA() {
 
         return 23;
     }
 
-    private static void mySlovtion(int[] x){
+    private static void mySlovtion(int[] x) {
         int min = getMin(x);
         int max = getMax(x);
         for (int i = min; i < max; i++) {
-            if (isVaild(i,x)){
+            if (isVaild(i, x)) {
                 System.out.println(i);
             }
         }
@@ -61,10 +79,10 @@ public class FullPermutation {
 
     private static boolean isVaild(int i, int[] x) {
 
-        int[] target = resolveArr(i,x.length);
+        int[] target = resolveArr(i, x.length);
         for (int j = 0; j < x.length; j++) {
             for (int k = j + 1; k < x.length; k++) {
-                if(target[j] == target[k])
+                if (target[j] == target[k])
                     return false;
             }
         }
@@ -74,7 +92,7 @@ public class FullPermutation {
             for (int k = 0; k < x.length; k++) {
                 if (target[j] != x[k])
                     count++;
-                else if (target[j] == x[k]){
+                else if (target[j] == x[k]) {
                     count = 0;
                 }
             }
@@ -88,14 +106,14 @@ public class FullPermutation {
 
     private static int[] resolveArr(int src, int length) {
 
-        int[] target =new int[length];
+        int[] target = new int[length];
 
         int temp = src;
         int count = 0;
-        while (temp>0 && count<length){
-            target[count] = temp%10;
+        while (temp > 0 && count < length) {
+            target[count] = temp % 10;
             temp /= 10;
-            count ++;
+            count++;
         }
 
         return target;
@@ -104,7 +122,7 @@ public class FullPermutation {
     private static int getMax(int[] x) {
 
         int sum = 0;
-        for (int i = (x.length-1); i >= 0; i--) {
+        for (int i = (x.length - 1); i >= 0; i--) {
             sum = sum * 10 + x[i];
         }
         return sum;
@@ -114,7 +132,7 @@ public class FullPermutation {
     private static int getSum(int[] x) {
         int sum = 0;
         for (int i = 0; i < x.length; i++) {
-            sum = sum * 10 +x[i];
+            sum = sum * 10 + x[i];
         }
         return sum;
     }
