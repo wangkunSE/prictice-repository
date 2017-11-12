@@ -1,16 +1,23 @@
 package com.soul.DP;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.CountDownLatch;
 
 public class NormalSort {
 
     public static void main(String[] args) {
-        int[] arr = {4, 1, 13, 5, 6, 3, 9, 23, 53};
-
+//        int[] arr = {4, 1, 13, 5, 6, 3, 9, 23, 53};
 //        bubbleSort(arr,arr.length);
 //        switchSort(arr,arr.length);
-        insertSort(arr,arr.length);
-        printArr(arr);
+//        insertSort(arr,arr.length);
+//        printArr(arr);
+
+        int[] arr = new int[10];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = 0;
+        }
+        System.out.println(arr.length);
     }
 
     private static void insertSort(int[] arr, int length) {

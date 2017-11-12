@@ -2,6 +2,7 @@ package com.soul.DP;
 
 import java.nio.ByteBuffer;
 import java.util.*;
+import java.util.concurrent.CountDownLatch;
 
 public class FullPermutation {
 
@@ -31,6 +32,8 @@ public class FullPermutation {
     }
 
     public static void main(String[] args) throws InterruptedException {
+
+        CountDownLatch countDownLatch = new CountDownLatch(10);
 //        int[] x = {1, 2, 3, 4, 5,6,7,8,9};
 //        long start = System.currentTimeMillis();
 ////        perm(x);
@@ -47,12 +50,12 @@ public class FullPermutation {
                     for (int j = 0; j < 1000; j++) {
                         fullPermutation.incr();
                     };
+                    countDownLatch.countDown();
                 };
             }.start();
         }
 
-
-        Thread.sleep(10000);
+        countDownLatch.await();
         System.out.println(fullPermutation.a);
     }
 
